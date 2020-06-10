@@ -2,20 +2,32 @@
 
 var gElCanvas;
 var gCtx;
+var gCurrMeme;
 
 function init(){
 gElCanvas = document.getElementById('meme-canvas');
 gCtx = gElCanvas.getContext('2d');
 
-gElCanvas.width = 800;
-gElCanvas.height = 550;
+gElCanvas.width = 500;
+gElCanvas.height = 500;
 gCtx.fillStyle = 'red';
-// gCtx.fillRect(0,0, 50, 50);
-
-drawImg(gImgs[0].url);
-
+renderGallery()
 }
 
+function renderGallery(){
+    var imges = getImges();
+    var strHTML = '';
+    var newImeges = imges.map(img=>
+    `<img src=${img.url} id =${img.id} onclick="onUpdateMeme(this)">`);
+    strHTML= newImeges.join('');
+    document.querySelector('.gallery-container').innerHTML = strHTML;
+}
+
+function renderMeme(){
+    var imges = getImges();
+
+    drawImg(imges[gCurrMeme.selectedImgId -1].url, gCurrMeme.lines[0].txt);
+}
 
 function drawImg(img, txt) {
     var elImg = new Image();
@@ -36,10 +48,14 @@ function drawText(text, x, y) {
     gCtx.strokeText(text, x, y);
 }
 
-
-var text = document.querySelector('#meme-txt').value;
-console.log(text);
-
 function onAddText(txt){
-    drawImg(gImgs[0].url, txt);
+    setMemeTxt(txt);
+    renderMeme();
+}
+
+function onUpdateMeme(elImg){
+    setMeme(elImg.id);
+    var meme = getMeme();
+    gCurrMeme = meme;
+    renderMeme();
 }

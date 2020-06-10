@@ -6,3 +6,13 @@ body{
     margin: 0;
     background-color: lightslategray;
 }
+
+.canvas-container{
+    margin-bottom: 30px;
+}
+
+.gallery-container{
+    height: 1000px;
+    width: 1000px;
+    border: 2px black solid;
+}
