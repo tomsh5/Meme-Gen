@@ -8,14 +8,24 @@ var gMeme = {
     lines: [
         {
             txt: '',
-            size: 20,
+            size: 80,
             align: 'left',
-            color: 'red'
+            color: 'red',
+            lineX: 200,
+            lineY: 120
+        },
+        {
+            txt: '',
+            size: 80,
+            align: 'left',
+            color: 'red',
+            lineX: 200,
+            lineY: 450
         }
     ]
 }
 
-function setMemeTxt(text){
+function setMemeTxt(text) {
     gMeme.lines[gMeme.selectedLineIdx].txt = text;
 }
 
@@ -24,11 +34,33 @@ function getImges() {
     return imges;
 }
 
-function setMeme(id){
-gMeme.selectedImgId = id;
+function setMeme(id) {
+    gMeme.selectedImgId = id;
 }
 
-function getMeme(){
-return gMeme;
+function getMeme() {
+    return gMeme;
 }
 
+function incraseMemeSize() {
+    gMeme.lines[gMeme.selectedLineIdx].size++;
+}
+
+function decraseMemeSize() {
+    gMeme.lines[gMeme.selectedLineIdx].size--;
+}
+
+function setLineUp(){
+    gMeme.lines[gMeme.selectedLineIdx].lineY--;
+}
+
+function setLineDown(){
+    gMeme.lines[gMeme.selectedLineIdx].lineY++;
+}
+
+
+function switchLine(){
+    gMeme.selectedLineIdx === 1 ? gMeme.selectedLineIdx = 0 : gMeme.selectedLineIdx = 1;
+    console.log(gMeme.selectedLineIdx);
+    
+}

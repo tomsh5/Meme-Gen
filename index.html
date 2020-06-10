@@ -13,8 +13,14 @@
                 
         
         </canvas>
+
         <input type="text" name="meme-txt" oninput= "onAddText(this.value)" id="meme-txt">
-        <button onclick="">Add</button>
+        <span>Text size</span>
+        <button onclick="onDecrase()">-</button>
+        <button onclick="onIncrase()">+</button>
+        <button onclick="onLineUp()">Up</button>
+        <button onclick="onLineDown()">Down</button>
+        <button onclick="onSwitchLine()">Switch Line</button>
     </div>
 
     <div class="gallery-container">
