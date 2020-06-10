@@ -7,8 +7,16 @@
     <title>Meme Gen</title>
     <h1>Meme Gen</h1>
 </head>
-<body>
-    
+<body onload="init()">
+    <div class="canvas-container">
+        <canvas  id="meme-canvas" style="border: 1px solid black;">
+                
+        
+        </canvas>
+        <input type="text" name="meme-txt" oninput= "onAddText(this.value)" id="meme-txt">
+        <button onclick="">Add</button>
+        
+    </div>
 
 <script src="js/service-storage.js"></script>
 <script src="js/service-util.js"></script>
