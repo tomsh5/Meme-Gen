@@ -1,36 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <title>Meme Gen</title>
-    <h1>Meme Gen</h1>
 </head>
+
 <body onload="init()">
-    <div class="canvas-container">
-        <canvas  id="meme-canvas" style="border: 1px solid black;">
-                
-        
-        </canvas>
+    <header>
+        <div class="main-header container flex space-between align-center">
+            <h1>Meme Gen</h1>
+            <div class="nav">
+                <a href="">link1</a>
+                <a href="">link2</a>
+                <a href="">link2</a>
+            </div>
+        </div>
+    </header>
 
-        <input type="text" name="meme-txt" oninput= "onAddText(this.value)" id="meme-txt">
-        <span>Text size</span>
-        <button onclick="onDecrase()">-</button>
-        <button onclick="onIncrase()">+</button>
-        <button onclick="onLineUp()">Up</button>
-        <button onclick="onLineDown()">Down</button>
-        <button onclick="onSwitchLine()">Switch Line</button>
-    </div>
+    <main class="main-container container">
 
-    <div class="gallery-container">
+        <div class="canvas-container container flex">
+            <canvas id="meme-canvas" style="border: 1px solid black;"></canvas>
+
+            <div class="editor-container">
+                <input type="text" name="meme-txt" onfocus="this.value=''" oninput="onAddText(this.value)"
+                    id="meme-txt">
+                <span>Text size</span>
+                <button id="decrase-font-size" onclick="onChangeSize(this)">-</button>
+                <button id="incrase-font-size" onclick="onChangeSize(this)">+</button>
+                <button id="line-up" onclick="onLineMove(this)">Up</button>
+                <button id="line-down" onclick="onLineMove(this)">Down</button>
+                <button onclick="onSwitchLine()">Switch Line</button>
+                <select onchange="onSetFont(this.value)">
+                    <option value="IMPACT">IMPACT</option>
+                    <option value="Ariel">Ariel</option>
+                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Verdana">Verdana</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="gallery-container"></div>
+    </main>
+
+    <footer>This is footer</footer>
 
 
-    </div>
-
-<script src="js/service-storage.js"></script>
-<script src="js/service-util.js"></script>
-<script src="js/mame-service.js"></script>
-<script src="js/meme-controller.js"></script>
+    <script src="js/service-storage.js"></script>
+    <script src="js/service-util.js"></script>
+    <script src="js/mame-service.js"></script>
+    <script src="js/meme-controller.js"></script>
 </body>
+
 </html>

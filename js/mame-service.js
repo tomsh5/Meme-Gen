@@ -11,6 +11,7 @@ var gMeme = {
             size: 80,
             align: 'left',
             color: 'red',
+            font: 'IMPACT',
             lineX: 200,
             lineY: 120
         },
@@ -19,6 +20,7 @@ var gMeme = {
             size: 80,
             align: 'left',
             color: 'red',
+            font: 'IMPACT',
             lineX: 200,
             lineY: 450
         }
@@ -27,6 +29,12 @@ var gMeme = {
 
 function setMemeTxt(text) {
     gMeme.lines[gMeme.selectedLineIdx].txt = text;
+}
+
+
+function CleanMemesTxt(){
+    gMeme.lines[0].txt = '';
+    gMeme.lines[1].txt = '';
 }
 
 function getImges() {
@@ -42,25 +50,29 @@ function getMeme() {
     return gMeme;
 }
 
-function incraseMemeSize() {
-    gMeme.lines[gMeme.selectedLineIdx].size++;
+function setLineSize(id){
+    if (id === 'incrase-font-size'){
+        gMeme.lines[gMeme.selectedLineIdx].size++;
+    }
+    else if(id === 'decrase-font-size'){
+        gMeme.lines[gMeme.selectedLineIdx].size--;
+    }
 }
 
-function decraseMemeSize() {
-    gMeme.lines[gMeme.selectedLineIdx].size--;
+function setLinePos(id){
+    if (id === 'line-up'){
+        gMeme.lines[gMeme.selectedLineIdx].lineY--;
+    }
+    else if(id === 'line-down'){
+        gMeme.lines[gMeme.selectedLineIdx].lineY++;
+    }
 }
-
-function setLineUp(){
-    gMeme.lines[gMeme.selectedLineIdx].lineY--;
-}
-
-function setLineDown(){
-    gMeme.lines[gMeme.selectedLineIdx].lineY++;
-}
-
 
 function switchLine(){
     gMeme.selectedLineIdx === 1 ? gMeme.selectedLineIdx = 0 : gMeme.selectedLineIdx = 1;
-    console.log(gMeme.selectedLineIdx);
-    
+}
+
+function SetFont(font){
+    gMeme.lines[gMeme.selectedLineIdx].font = font;
+
 }

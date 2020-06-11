@@ -5,14 +5,106 @@
 body{
     margin: 0;
     background-color: lightslategray;
+    /* display: flex;
+    flex-direction: column; */
+}
+
+.container{
+    max-width: 980px;
+    margin: 0 auto;
+}
+
+img{
+    width: 100%;
+    height: 100%;
+}
+
+header{
+    background-color: coral;
+    margin-bottom: 30px;
+}
+
+.main-header{
+    background-color: coral;
+    margin-bottom: 30px;
+}
+
+.nav{
+
+
+}
+
+.main-container{
+    height: 510px;
 }
 
 .canvas-container{
     margin-bottom: 30px;
+    visibility: hidden;
+}
+
+.editor-container{
+    margin-left: 20px;
 }
 
 .gallery-container{
-    height: 1000px;
-    width: 1000px;
-    border: 2px black solid;
+    display: grid;
+    position: absolute;
+    top: 100px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(200px, 200px));
+    grid-auto-rows: 200px;
+    gap: 10px;
+}
+
+footer{
+    height: 30px;
+    background-color: coral;
+    border:1px darkgray solid;
+    margin-top: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+
+
+@media (max-width: 665px) {
+    .canvas-container{
+        flex-direction: column;
+    }
+    .editor-container{
+        margin-top: 20px;
+    }
+}
+
+
+/* HELPERS */
+
+/* flex */
+
+.flex {
+    display: flex;
+}
+
+.flex.wrap {
+    flex-wrap: wrap;
+}
+
+.flex.space-between {
+    justify-content: space-between;
+}
+
+.flex.center {
+    justify-content: center;
+}
+
+.flex.align-center {
+    align-items: center;
+}
+
+.flex.diraction-row{
+    flex-direction: row;
+}
+
+.flex.diraction-column{
+    flex-direction: column;
 }
