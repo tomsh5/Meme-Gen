@@ -4,7 +4,7 @@ var gElCanvas;
 var gCtx;
 var gCurrMeme;
 var gCurrLineIdx = 0;
-var gClearTxtFrame = false;
+var gClearTxtFrame = true;
 var prevLine;
 var prevPrevLine;
 var currLine;
@@ -220,4 +220,9 @@ function onDownloadCanvas(elLink) {
     const data = gElCanvas.toDataURL();
     elLink.href = data;
     elLink.download = 'my_img';
+}
+
+function onGallery(){
+    document.querySelector('.canvas-container').style.visibility = 'hidden';
+    document.querySelector('.gallery-container').style.visibility = 'visible';
 }
