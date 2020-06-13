@@ -6,7 +6,9 @@ var gCurrMeme;
 var gCurrLineIdx = 0;
 var gClearTxtFrame = false;
 var prevLine;
+var prevPrevLine;
 var currLine;
+var activeLine = 1;
 
 function init() {
     gElCanvas = document.getElementById('meme-canvas');
@@ -29,29 +31,67 @@ function renderGallery() {
 
 function renderMeme() {
     var imges = getImges();
-    if (gCurrLineIdx === 0) {
-        currLine = gCurrMeme.lines[0]
-        prevLine = gCurrMeme.lines[1]
-    }
-    else if (gCurrLineIdx === 1) {
-        prevLine = gCurrMeme.lines[0]
-        currLine = gCurrMeme.lines[1]
-    }
-
     var currImg = imges[gCurrMeme.selectedImgId - 1].url;
-    drawImg(currImg, currLine, prevLine);
+
+    switch (activeLine) {
+        case 1:
+            currLine = gCurrMeme.lines[0];
+            drawImg(currImg, currLine);
+            break;
+        case 2:
+            if (gCurrLineIdx === 0) {
+                currLine = gCurrMeme.lines[0];
+                prevLine = gCurrMeme.lines[1];
+            }
+            else if (gCurrLineIdx === 1) {
+                currLine = gCurrMeme.lines[1];
+                prevLine = gCurrMeme.lines[0];
+            }
+            drawImg(currImg, currLine, prevLine);
+            break;
+        case 3:
+            if (gCurrLineIdx === 0) {
+                currLine = gCurrMeme.lines[0];
+                prevLine = gCurrMeme.lines[2];
+                prevPrevLine = gCurrMeme.lines[1];
+            }
+            else if (gCurrLineIdx === 1) {
+                currLine = gCurrMeme.lines[1];
+                prevLine = gCurrMeme.lines[0];
+                prevPrevLine = gCurrMeme.lines[2];
+            }
+            else if (gCurrLineIdx === 2) {
+                currLine = gCurrMeme.lines[2];
+                prevLine = gCurrMeme.lines[1];
+                prevPrevLine = gCurrMeme.lines[0];
+            }
+            drawImg(currImg, currLine, prevLine, prevPrevLine);
+            break;
+    }
 }
 
-function drawImg(img, currLine, prevLine) {
+function drawImg(img, currLine, prevLine, prevPrevLine) {
 
     var elImg = new Image();
     elImg.src = img;
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);
-        drawText(currLine.txt, currLine.lineX, currLine.lineY, currLine.size, currLine.font, currLine.color, currLine.sColor, currLine.align);
-        drawText(prevLine.txt, prevLine.lineX, prevLine.lineY, prevLine.size, prevLine.font, prevLine.color, prevLine.sColor,prevLine.align);
         if (!gClearTxtFrame) {
             drawRect(0, currLine.lineY - 90);
+        }
+
+        if (!prevLine && !prevPrevLine) {
+            drawText(currLine.txt, currLine.lineX, currLine.lineY, currLine.size, currLine.font, currLine.color, currLine.sColor, currLine.align);
+        }
+        else if (!prevPrevLine) {
+            drawText(prevLine.txt, prevLine.lineX, prevLine.lineY, prevLine.size, prevLine.font, prevLine.color, prevLine.sColor, prevLine.align);
+            drawText(currLine.txt, currLine.lineX, currLine.lineY, currLine.size, currLine.font, currLine.color, currLine.sColor, currLine.align);
+
+        }
+        else {
+            drawText(prevLine.txt, prevLine.lineX, prevLine.lineY, prevLine.size, prevLine.font, prevLine.color, prevLine.sColor, prevLine.align);
+            drawText(currLine.txt, currLine.lineX, currLine.lineY, currLine.size, currLine.font, currLine.color, currLine.sColor, currLine.align);
+            drawText(prevPrevLine.txt, prevPrevLine.lineX, prevPrevLine.lineY, prevPrevLine.size, prevPrevLine.font, prevPrevLine.color, prevPrevLine.sColor, prevPrevLine.align);
         }
     }
 }
@@ -105,10 +145,38 @@ function onLineMove(elBtn) {
 }
 
 function onSwitchLine() {
-    switchLine();
-    document.querySelector('#meme-txt').value = '';
-    gCurrLineIdx === 0 ? gCurrLineIdx = 1 : gCurrLineIdx = 0;
-    renderMeme();
+    if (activeLine === 1) {
+        return;
+    }
+    else if (activeLine === 2) {
+        switchLine();
+        document.querySelector('#meme-txt').value = '';
+        gCurrLineIdx === 0 ? gCurrLineIdx = 1 : gCurrLineIdx = 0;
+        renderMeme();
+    }
+    else if (activeLine === 3) {
+        switchLine();
+        document.querySelector('#meme-txt').value = '';
+        switch (gCurrLineIdx) {
+            case 0:
+                gCurrLineIdx = 1;
+                document.querySelector('#meme-txt').value = '';
+                renderMeme();
+                break;
+            case 1:
+                gCurrLineIdx = 2;
+                document.querySelector('#meme-txt').value = '';
+                renderMeme();
+                break;
+            case 2:
+                gCurrLineIdx = 0;
+                document.querySelector('#meme-txt').value = '';
+                renderMeme();
+                break;
+        }
+
+    }
+
 }
 
 function onSetFont(val) {
@@ -128,8 +196,28 @@ function onChangeAlign(elBtn) {
     renderMeme();
 }
 
-function onRemoveLine(){
+function onRemoveLine() {
     removeLine()
     document.querySelector('#meme-txt').value = '';
     renderMeme();
+}
+
+function onAddLine() {
+    if (activeLine < 3) {
+        activeLine++;
+        renderMeme();
+    }
+}
+
+function removeFrame() {
+    gClearTxtFrame = true;
+    renderMeme();
+}
+
+function onDownloadCanvas(elLink) {
+    gClearTxtFrame = true;
+    renderMeme();
+    const data = gElCanvas.toDataURL();
+    elLink.href = data;
+    elLink.download = 'my_img';
 }

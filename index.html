@@ -8,14 +8,14 @@
     <title>Meme Gen</title>
 </head>
 
-<body onload="init()">
+<body class="body" onload="init()">
     <header>
         <div class="main-header container flex space-between align-center">
-            <h1>Meme Gen</h1>
+            <img src="img/LOGO.png" class="logo">
             <div class="nav">
-                <a href="">link1</a>
-                <a href="">link2</a>
-                <a href="">link2</a>
+                <a href="">Gallery</a>
+                <p class="seperator">|</p>
+                <a href="">About</a>
             </div>
         </div>
     </header>
@@ -26,37 +26,51 @@
             <canvas id="meme-canvas" style="border: 1px solid black;"></canvas>
 
             <div class="editor-container">
-                <input type="text" name="meme-txt" onfocus="this.value=''" oninput="onAddText(this.value)"
+                <input class="txt-line" type="text" name="meme-txt" onfocus="this.value=''" oninput="onAddText(this.value)"
                     id="meme-txt">
-                <button id="decrase-font-size" onclick="onChangeSize(this)">-</button>
-                <button id="incrase-font-size" onclick="onChangeSize(this)">+</button>
-                <button id="line-up" onclick="onLineMove(this)">Up</button>
-                <button id="line-down" onclick="onLineMove(this)">Down</button>
-                <button onclick="onSwitchLine()">Switch Line</button>
-                <select onchange="onSetFont(this.value)">
-                    <option value="IMPACT">IMPACT</option>
-                    <option value="Ariel">Ariel</option>
-                    <option value="Calibri">Calibri</option>
-                    <option value="Verdana">Verdana</option>
-                </select>
-                <input onchange="onChangeColor(this)" type="color" id="color" name="color" value="#FFFFFF">
-                <input onchange="onChangeColor(this)" type="color" id="s-color" name="s-color" value="black">
-                <button id="align-left" onclick="onChangeAlign(this)">Left</button>
-                <button id="align-center" onclick="onChangeAlign(this)">Center</button>
-                <button id="align-right" onclick="onChangeAlign(this)">Right</button>
-                <button onclick="onRemoveLine()">Delete</button>
-                <button onclick="onAddLine()">Add</button>
-                <button onclick="onSave()">Save</button>
-                <button onclick="onDownload()">Download</button>
+                <button id="decrase-font-size" onclick="onChangeSize(this)"><img src="icons/decrease font - icon.png"></button>
+                <button id="incrase-font-size" onclick="onChangeSize(this)"><img src="icons/increase font - icon.png"></button>
+                <button id="line-up" onclick="onLineMove(this)"><img src="icons/up.png"></button>
+                <button id="line-down" onclick="onLineMove(this)"><img src="icons/down.png"></button>
+                <button onclick="onSwitchLine()"><img src="icons/up-and-down.png"></button>
+                <button id="align-left" onclick="onChangeAlign(this)"><img src="icons/align-to-left.png"></button>
+                <button id="align-center" onclick="onChangeAlign(this)"><img src="icons/center-text-alignment.png"></button>
+                <button id="align-right" onclick="onChangeAlign(this)"><img src="icons/align-to-right.png"></button>
+                <button onclick="onRemoveLine()"><img src="icons/trash.png"></button>
+                <button onclick="onAddLine()"><img src="icons/add.png"></button>
+                
 
+                        <select class="font" onchange="onSetFont(this.value)">
+                            <option value="IMPACT">IMPACT</option>
+                            <option value="Ariel">Ariel</option>
+                            <option value="Calibri">Calibri</option>
+                            <option value="Verdana">Verdana</option>
+                        </select>
 
+                        
+                        <!-- <button class="color"><img src="icons/text stroke.png"><input type="color" class="color"
+                            name="s-color" id="s-color" value="#000000" onchange="onChangeColor(this)"></button>
+                        <button class="color"><img src="icons/paint-board-and-brush.png"><input type="color" class="color"
+                            id="color" name="fill-color" value="#ffffff" onchange="onChangeColor(this)"></button> -->
+                        <input onchange="onChangeColor(this)" type="color" id="color" name="color" value="#FFFFFF">
+                        <input onchange="onChangeColor(this)" type="color" id="s-color" name="s-color" value="black">
+
+                        <a href="#" class="download" onclick="onDownloadCanvas(this)"
+                            download="">Download</a>
             </div>
         </div>
-
-        <div class="gallery-container"></div>
+        
+        <div class="gallery-container container"></div>
     </main>
 
-    <footer>This is footer</footer>
+    <footer class="flex diraction-column justify-center align-center">
+        <img src="img/LOGO.png" class="logo2">
+        
+        <p> All rights reserved 2020
+        
+    </p>
+    
+</footer>
 
 
     <script src="js/service-storage.js"></script>

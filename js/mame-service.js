@@ -33,7 +33,7 @@ var gMeme = {
             sColor: 'black',
             font: 'IMPACT',
             lineX: 200,
-            lineY: 120
+            lineY: 90
         },
         {
             txt: '',
@@ -43,7 +43,17 @@ var gMeme = {
             sColor: 'black',
             font: 'IMPACT',
             lineX: 200,
-            lineY: 450
+            lineY: 480
+        },
+        {
+            txt: '',
+            size: 80,
+            align: 'center',
+            color: 'white',
+            sColor: 'black',
+            font: 'IMPACT',
+            lineX: 200,
+            lineY: 270
         }
     ]
 }
@@ -56,6 +66,7 @@ function setMemeTxt(text) {
 function CleanMemesTxt() {
     gMeme.lines[0].txt = '';
     gMeme.lines[1].txt = '';
+    gMeme.lines[2].txt = '';
 }
 
 function getImges() {
@@ -90,7 +101,18 @@ function setLinePos(id) {
 }
 
 function switchLine() {
-    gMeme.selectedLineIdx === 1 ? gMeme.selectedLineIdx = 0 : gMeme.selectedLineIdx = 1;
+
+    switch (gMeme.selectedLineIdx) {
+        case 0:
+            gMeme.selectedLineIdx = 1;
+            break;
+        case 1:
+            gMeme.selectedLineIdx = 2;
+            break;
+        case 2:
+            gMeme.selectedLineIdx = 0;
+            break;
+    }
 }
 
 function SetFont(font) {
