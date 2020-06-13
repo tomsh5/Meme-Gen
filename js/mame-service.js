@@ -1,6 +1,25 @@
 'use strict';
 var gKeywords = { 'happy': 12, 'funny puk': 1 }
-var gImgs = [{ id: 1, url: './img/1.jpg', keywords: ['happy'] }, { id: 2, url: './img/2.jpg', keywords: ['sad'] }];
+var gImgs = [
+    { id: 1, url: './img/1.jpg', keywords: ['happy'] },
+    { id: 2, url: './img/2.jpg', keywords: ['sad'] },
+    { id: 3, url: './img/3.jpg', keywords: ['sad'] },
+    { id: 4, url: './img/4.jpg', keywords: ['sad'] },
+    { id: 5, url: './img/5.jpg', keywords: ['sad'] },
+    { id: 6, url: './img/6.jpg', keywords: ['sad'] },
+    { id: 7, url: './img/7.jpg', keywords: ['sad'] },
+    { id: 8, url: './img/8.jpg', keywords: ['sad'] },
+    { id: 9, url: './img/9.jpg', keywords: ['sad'] },
+    { id: 10, url: './img/10.jpg', keywords: ['sad'] },
+    { id: 11, url: './img/11.jpg', keywords: ['sad'] },
+    { id: 12, url: './img/12.jpg', keywords: ['sad'] },
+    { id: 13, url: './img/13.jpg', keywords: ['sad'] },
+    { id: 14, url: './img/14.jpg', keywords: ['sad'] },
+    { id: 15, url: './img/15.jpg', keywords: ['sad'] },
+    { id: 16, url: './img/16.jpg', keywords: ['sad'] },
+    { id: 17, url: './img/17.jpg', keywords: ['sad'] },
+    { id: 18, url: './img/18.jpg', keywords: ['sad'] },
+];
 var gMeme = {
     selectedImgId: 1,
     selectedLineIdx: 0,
@@ -9,8 +28,9 @@ var gMeme = {
         {
             txt: '',
             size: 80,
-            align: 'left',
-            color: 'red',
+            align: 'center',
+            color: 'white',
+            sColor: 'black',
             font: 'IMPACT',
             lineX: 200,
             lineY: 120
@@ -18,8 +38,9 @@ var gMeme = {
         {
             txt: '',
             size: 80,
-            align: 'left',
-            color: 'red',
+            align: 'center',
+            color: 'white',
+            sColor: 'black',
             font: 'IMPACT',
             lineX: 200,
             lineY: 450
@@ -32,7 +53,7 @@ function setMemeTxt(text) {
 }
 
 
-function CleanMemesTxt(){
+function CleanMemesTxt() {
     gMeme.lines[0].txt = '';
     gMeme.lines[1].txt = '';
 }
@@ -50,29 +71,56 @@ function getMeme() {
     return gMeme;
 }
 
-function setLineSize(id){
-    if (id === 'incrase-font-size'){
+function setLineSize(id) {
+    if (id === 'incrase-font-size') {
         gMeme.lines[gMeme.selectedLineIdx].size++;
     }
-    else if(id === 'decrase-font-size'){
+    else if (id === 'decrase-font-size') {
         gMeme.lines[gMeme.selectedLineIdx].size--;
     }
 }
 
-function setLinePos(id){
-    if (id === 'line-up'){
+function setLinePos(id) {
+    if (id === 'line-up') {
         gMeme.lines[gMeme.selectedLineIdx].lineY--;
     }
-    else if(id === 'line-down'){
+    else if (id === 'line-down') {
         gMeme.lines[gMeme.selectedLineIdx].lineY++;
     }
 }
 
-function switchLine(){
+function switchLine() {
     gMeme.selectedLineIdx === 1 ? gMeme.selectedLineIdx = 0 : gMeme.selectedLineIdx = 1;
 }
 
-function SetFont(font){
+function SetFont(font) {
     gMeme.lines[gMeme.selectedLineIdx].font = font;
+}
 
+function setColor(color) {
+    if (color.id === 'color') {
+        gMeme.lines[gMeme.selectedLineIdx].color = color.value;
+    }
+    else if (color.id === 's-color') {
+        gMeme.lines[gMeme.selectedLineIdx].sColor = color.value;
+    }
+}
+
+function setAlign(id) {
+    if (id === 'align-left') {
+        gMeme.lines[gMeme.selectedLineIdx].align = 'left';
+        gMeme.lines[gMeme.selectedLineIdx].lineX = 10;
+    }
+    else if (id === 'align-center') {
+        gMeme.lines[gMeme.selectedLineIdx].align = 'center';
+        gMeme.lines[gMeme.selectedLineIdx].lineX = 260;
+    }
+    else if (id === 'align-right') {
+        gMeme.lines[gMeme.selectedLineIdx].align = 'right';
+        gMeme.lines[gMeme.selectedLineIdx].lineX = 490;
+    }
+}
+
+function removeLine() {
+    gMeme.lines[gMeme.selectedLineIdx].txt = '';
 }

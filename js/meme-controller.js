@@ -48,20 +48,20 @@ function drawImg(img, currLine, prevLine) {
     elImg.src = img;
     elImg.onload = () => {
         gCtx.drawImage(elImg, 0, 0, gElCanvas.width, gElCanvas.height);
-        drawText(currLine.txt, currLine.lineX, currLine.lineY, currLine.size, currLine.font);
-        drawText(prevLine.txt, prevLine.lineX, prevLine.lineY, prevLine.size, prevLine.font);
-        if (!gClearTxtFrame){
-        drawRect(currLine.lineX - 200, currLine.lineY-90);
+        drawText(currLine.txt, currLine.lineX, currLine.lineY, currLine.size, currLine.font, currLine.color, currLine.sColor, currLine.align);
+        drawText(prevLine.txt, prevLine.lineX, prevLine.lineY, prevLine.size, prevLine.font, prevLine.color, prevLine.sColor,prevLine.align);
+        if (!gClearTxtFrame) {
+            drawRect(0, currLine.lineY - 90);
         }
     }
 }
 
-function drawText(text, x, y, size, font) {
+function drawText(text, x, y, size, font, color, sColor, align) {
     gCtx.lineWidth = '2';
-    gCtx.strokeStyle = 'black';
-    gCtx.fillStyle = 'white';
+    gCtx.strokeStyle = sColor;
+    gCtx.fillStyle = color;
     gCtx.font = size + 'px ' + font;
-    gCtx.textAlign = 'center';
+    gCtx.textAlign = align;
     gCtx.fillText(text, x, y);
     gCtx.strokeText(text, x, y);
 }
@@ -93,7 +93,7 @@ function onUpdateMeme(elImg) {
     renderMeme();
 }
 
-function onChangeSize(elBtn){
+function onChangeSize(elBtn) {
     setLineSize(elBtn.id);
     renderMeme();
 }
@@ -111,9 +111,25 @@ function onSwitchLine() {
     renderMeme();
 }
 
-function onSetFont(val){
+function onSetFont(val) {
     var font = val.toString();
-    console.log(font);
     SetFont(font);
+    renderMeme();
+}
+
+
+function onChangeColor(elBtn) {
+    setColor(elBtn)
+    renderMeme();
+}
+
+function onChangeAlign(elBtn) {
+    setAlign(elBtn.id)
+    renderMeme();
+}
+
+function onRemoveLine(){
+    removeLine()
+    document.querySelector('#meme-txt').value = '';
     renderMeme();
 }

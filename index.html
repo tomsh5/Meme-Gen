@@ -28,7 +28,6 @@
             <div class="editor-container">
                 <input type="text" name="meme-txt" onfocus="this.value=''" oninput="onAddText(this.value)"
                     id="meme-txt">
-                <span>Text size</span>
                 <button id="decrase-font-size" onclick="onChangeSize(this)">-</button>
                 <button id="incrase-font-size" onclick="onChangeSize(this)">+</button>
                 <button id="line-up" onclick="onLineMove(this)">Up</button>
@@ -37,9 +36,20 @@
                 <select onchange="onSetFont(this.value)">
                     <option value="IMPACT">IMPACT</option>
                     <option value="Ariel">Ariel</option>
-                    <option value="Times New Roman">Times New Roman</option>
+                    <option value="Calibri">Calibri</option>
                     <option value="Verdana">Verdana</option>
                 </select>
+                <input onchange="onChangeColor(this)" type="color" id="color" name="color" value="#FFFFFF">
+                <input onchange="onChangeColor(this)" type="color" id="s-color" name="s-color" value="black">
+                <button id="align-left" onclick="onChangeAlign(this)">Left</button>
+                <button id="align-center" onclick="onChangeAlign(this)">Center</button>
+                <button id="align-right" onclick="onChangeAlign(this)">Right</button>
+                <button onclick="onRemoveLine()">Delete</button>
+                <button onclick="onAddLine()">Add</button>
+                <button onclick="onSave()">Save</button>
+                <button onclick="onDownload()">Download</button>
+
+
             </div>
         </div>
 
