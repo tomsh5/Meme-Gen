@@ -81,35 +81,34 @@ function drawImg(img, currLine, prevLine, prevPrevLine) {
         }
 
         if (!prevLine && !prevPrevLine) {
-            drawText(currLine.txt, currLine.lineX, currLine.lineY, currLine.size, currLine.font, currLine.color, currLine.sColor, currLine.align);
+            drawText(currLine);
         }
         else if (!prevPrevLine) {
-            drawText(prevLine.txt, prevLine.lineX, prevLine.lineY, prevLine.size, prevLine.font, prevLine.color, prevLine.sColor, prevLine.align);
-            drawText(currLine.txt, currLine.lineX, currLine.lineY, currLine.size, currLine.font, currLine.color, currLine.sColor, currLine.align);
+            drawText(prevLine);
+            drawText(currLine);
 
         }
         else {
-            drawText(prevLine.txt, prevLine.lineX, prevLine.lineY, prevLine.size, prevLine.font, prevLine.color, prevLine.sColor, prevLine.align);
-            drawText(currLine.txt, currLine.lineX, currLine.lineY, currLine.size, currLine.font, currLine.color, currLine.sColor, currLine.align);
-            drawText(prevPrevLine.txt, prevPrevLine.lineX, prevPrevLine.lineY, prevPrevLine.size, prevPrevLine.font, prevPrevLine.color, prevPrevLine.sColor, prevPrevLine.align);
+            drawText(prevLine);
+            drawText(currLine);
+            drawText(prevPrevLine);
         }
     }
 }
 
-function drawText(text, x, y, size, font, color, sColor, align) {
+function drawText(line) {
     gCtx.lineWidth = '2';
-    gCtx.strokeStyle = sColor;
-    gCtx.fillStyle = color;
-    gCtx.font = size + 'px ' + font;
-    gCtx.textAlign = align;
-    gCtx.fillText(text, x, y);
-    gCtx.strokeText(text, x, y);
+    gCtx.strokeStyle = line.sColor;
+    gCtx.fillStyle = line.color;
+    gCtx.font = line.size + 'px ' + line.font;
+    gCtx.textAlign = line.align;
+    gCtx.fillText(line.txt, line.lineX, line.lineY);
+    gCtx.strokeText(line.txt, line.lineX, line.lineY);
 }
 
 function drawRect(x, y) {
     gCtx.beginPath();
     gCtx.rect(x, y, 500, 100);
-    // gCtx.rect(x-75, y-75, 150, 150);
     gCtx.strokeStyle = 'black';
     gCtx.stroke();
 }
@@ -222,7 +221,7 @@ function onDownloadCanvas(elLink) {
     elLink.download = 'my_img';
 }
 
-function onGallery(){
+function onGallery() {
     document.querySelector('.canvas-container').style.visibility = 'hidden';
     document.querySelector('.gallery-container').style.visibility = 'visible';
 }
