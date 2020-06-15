@@ -30,13 +30,7 @@ function renderGallery() {
 }
 
 function renderMeme() {
-    document.querySelector('#meme-txt').value = '';
-    CleanMemesTxt();
-    var meme = getMeme();
-    gCurrMeme = meme;
-    gCurrLineIdx = 0;
-    meme.selectedLineIdx = 0;
-
+    
     var imges = getImges();
     var currImg = imges[gCurrMeme.selectedImgId - 1].url;
 
@@ -126,7 +120,13 @@ function onAddText(txt) {
 }
 
 function onUpdateMeme(elImg) {
+    document.querySelector('#meme-txt').value = '';
     setMeme(elImg.id);
+    CleanMemesTxt();
+    var meme = getMeme();
+    gCurrMeme = meme;
+    gCurrLineIdx = 0;
+    meme.selectedLineIdx = 0;
     document.querySelector('.meme-editor').toggleAttribute("hidden");
     document.querySelector('.gallery').toggleAttribute("hidden");
     // document.querySelector('.gallery-container').style.visibility = 'hidden';
