@@ -10,20 +10,22 @@
 
 <body class="body" onload="init()">
     <header>
+
         <div class="main-header container flex space-between align-center">
             <img src="img/LOGO.png" class="logo">
             <div class="nav">
-                <a onclick="onGallery(), init()" href="">Gallery</a>
+                <button class="menu-btn" onclick="onGallery(), init()" href="">Gallery</button>
                 <p class="seperator">|</p>
-                <a href="">About</a>
+                <button class="menu-btn">About</button>
             </div>
         </div>
     </header>
 
-    <main class="main-container container">
-
-        <div class="canvas-container container flex">
-            <canvas id="meme-canvas" style="border: 1px solid black;"></canvas>
+    <main class="meme-editor" hidden>
+        <section class="meme-editor-container container">
+            <div class="canvas-container">
+                <canvas id="meme-canvas" style="border: 1px solid black;"></canvas>
+            </div>
 
             <div class="editor-container">
                 <input class="txt-line" type="text" name="meme-txt" placeholder="Enter Text Here"
@@ -41,7 +43,7 @@
                 <button id="align-center" onclick="onChangeAlign(this)"><img
                         src="icons/center-text-alignment.png"></button>
                 <button id="align-right" onclick="onChangeAlign(this)"><img src="icons/align-to-right.png"></button>
-                
+
                 <select class="font" onchange="onSetFont(this.value)">
                     <option value="IMPACT">IMPACT</option>
                     <option value="Ariel">Ariel</option>
@@ -64,9 +66,22 @@
 
                 <a href="#" class="download" onclick="onDownloadCanvas(this)" download="">Download</a>
             </div>
-        </div>
 
-        <div class="gallery-container container"></div>
+        </section>
+
+    </main>
+
+    <main class="gallery">
+
+        <div class="keyword-filter"></div>
+
+        <section class="gallery-container container">
+            <div class="image-gallery">
+
+            </div>
+
+        </section>
+
     </main>
 
     <footer class="flex diraction-column justify-center align-center">

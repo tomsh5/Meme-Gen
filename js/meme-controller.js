@@ -26,10 +26,17 @@ function renderGallery() {
     var newImeges = imges.map(img =>
         `<img src=${img.url} id =${img.id} onclick="onUpdateMeme(this)">`);
     strHTML = newImeges.join('');
-    document.querySelector('.gallery-container').innerHTML = strHTML;
+    document.querySelector('.image-gallery').innerHTML = strHTML;
 }
 
 function renderMeme() {
+    document.querySelector('#meme-txt').value = '';
+    CleanMemesTxt();
+    var meme = getMeme();
+    gCurrMeme = meme;
+    gCurrLineIdx = 0;
+    meme.selectedLineIdx = 0;
+
     var imges = getImges();
     var currImg = imges[gCurrMeme.selectedImgId - 1].url;
 
@@ -119,16 +126,11 @@ function onAddText(txt) {
 }
 
 function onUpdateMeme(elImg) {
-
-    document.querySelector('.gallery-container').style.visibility = 'hidden';
-    document.querySelector('.canvas-container').style.visibility = 'visible';
-    document.querySelector('#meme-txt').value = '';
     setMeme(elImg.id);
-    CleanMemesTxt();
-    var meme = getMeme();
-    gCurrMeme = meme;
-    gCurrLineIdx = 0;
-    meme.selectedLineIdx = 0;
+    document.querySelector('.meme-editor').toggleAttribute("hidden");
+    document.querySelector('.gallery').toggleAttribute("hidden");
+    // document.querySelector('.gallery-container').style.visibility = 'hidden';
+    // document.querySelector('.canvas-container').style.visibility = 'visible';
     renderMeme();
 }
 
@@ -222,6 +224,6 @@ function onDownloadCanvas(elLink) {
 }
 
 function onGallery() {
-    document.querySelector('.canvas-container').style.visibility = 'hidden';
-    document.querySelector('.gallery-container').style.visibility = 'visible';
+    document.querySelector('.meme-editor').toggleAttribute("hidden");
+    document.querySelector('.gallery').toggleAttribute("hidden");
 }
