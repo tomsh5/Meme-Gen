@@ -11,7 +11,6 @@
 
 body{
     margin: 0;
-    background-color: #e3e3e3;
 }
 
 main{
@@ -113,7 +112,9 @@ header{
     display:inline-block;
 }
 
-input.color {
+
+input#color, input#s-color{
+    padding-bottom: 3rem;
     cursor: pointer;
 }
 
@@ -124,8 +125,10 @@ select.font{
     padding-left: 1.25rem;
     font-size: 1.25rem;
     font-family: montserrat-regular;
-    border: none;
+    border: black 1px solid;
     grid-column: span 3;
+    cursor: pointer;
+    outline: none;
 }
 
 .txt-line{
@@ -136,6 +139,17 @@ select.font{
     padding-left: 20px;
     font-size: 1.25rem;
     grid-column: span 5;
+    border: black 1px solid;
+}
+
+input.color{
+    height: 100%;
+    width: 60px;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    top: 0;
+    cursor: pointer;
 }
 
 .download{

@@ -129,8 +129,6 @@ function onUpdateMeme(elImg) {
     meme.selectedLineIdx = 0;
     document.querySelector('.meme-editor').toggleAttribute("hidden");
     document.querySelector('.gallery').toggleAttribute("hidden");
-    // document.querySelector('.gallery-container').style.visibility = 'hidden';
-    // document.querySelector('.canvas-container').style.visibility = 'visible';
     renderMeme();
 }
 
@@ -192,6 +190,11 @@ function onChangeColor(elBtn) {
     renderMeme();
 }
 
+function onSetFillColor(color) {
+    setFillColor(color);
+    renderMeme();
+}
+
 function onChangeAlign(elBtn) {
     setAlign(elBtn.id)
     renderMeme();
@@ -206,6 +209,7 @@ function onRemoveLine() {
 function onAddLine() {
     if (activeLine < 3) {
         activeLine++;
+        switchLine()
         renderMeme();
     }
 }
@@ -215,12 +219,13 @@ function removeFrame() {
     renderMeme();
 }
 
+
+
 function onDownloadCanvas(elLink) {
-    gClearTxtFrame = true;
-    renderMeme();
     const data = gElCanvas.toDataURL();
     elLink.href = data;
-    elLink.download = 'my_img';
+    removeFrame()
+    elLink.download = 'my-meme';
 }
 
 function onGallery() {

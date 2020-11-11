@@ -128,6 +128,11 @@ function setColor(color) {
     }
 }
 
+function setFillColor(color) {
+    let currLine = gMeme.lines[gMeme.selectedLineIdx];
+    currLine.color.fill = color;
+}
+
 function setAlign(id) {
     if (id === 'align-left') {
         gMeme.lines[gMeme.selectedLineIdx].align = 'left';
